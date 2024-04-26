@@ -16,7 +16,6 @@ module.exports = {
     'plugin:jest-formatting/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:storybook/recommended',
     'prettier',
   ],
   rules: {
