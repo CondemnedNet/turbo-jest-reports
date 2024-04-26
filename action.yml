@@ -1,0 +1,14 @@
+name: 'TurboRepo Jest Reports'
+description: 'Collect and display Jest Unit Test and Coverage reports in a TurboRepo'
+inputs:
+  test-reports:
+    description: 'List of Unit Test Reports (json)'
+    required: true
+  coverage-reports:
+    description: 'List of Jest Coverage reports (json)'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'file-text'
+  color: 'green'
