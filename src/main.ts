@@ -16,13 +16,13 @@ async function run(): Promise<void> {
         core.info(`Parsing file ${coverageReport}`);
       });
 
-      core.summary.addRaw("Summary").write();
+      core.summary.addRaw('Summary').write();
 
-      let octokit = new Octokit();
+      const octokit = new Octokit();
 
-      const pr = github.context.payload.pull_request
-      const sha = (pr && pr.head.sha) || github.context.sha
-      
+      const pr = github.context.payload.pull_request;
+      const sha = (pr && pr.head.sha) || github.context.sha;
+
       await octokit.checks.create({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
@@ -31,13 +31,11 @@ async function run(): Promise<void> {
         status: 'completed',
         conclusion: 'success',
         output: {
-          title: "Hi",
-          summary: "Report summary",
-          text: "This is text"
-        }
-
+          title: 'Hi',
+          summary: 'Report summary',
+          text: 'This is text',
+        },
       });
-
     }
   } catch (error) {
     core.setFailed((error as Error).message);
