@@ -143,7 +143,7 @@ function transform(val: any, typ: any, getProps: any, key: any = '', parent: any
     });
     Object.getOwnPropertyNames(val).forEach(key => {
       if (!Object.prototype.hasOwnProperty.call(props, key)) {
-        result[key] = transform(val[key], additional, getProps, key, ref);
+        result[key] = val[key];
       }
     });
     return result;
