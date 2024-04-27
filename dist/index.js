@@ -75,6 +75,9 @@ function transform(val, typ, getProps, key = '', parent = '') {
     function transformPrimitive(typ, val) {
         if (typeof typ === typeof val)
             return val;
+        if (typeof typ === 'boolean' && typeof val !== 'boolean') {
+            return !!+val;
+        }
         return invalidValue(typ, val, key, parent);
     }
     function transformUnion(typs, val) {

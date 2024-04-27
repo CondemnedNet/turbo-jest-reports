@@ -85,6 +85,9 @@ function jsToJSONProps(typ: any): any {
 function transform(val: any, typ: any, getProps: any, key: any = '', parent: any = ''): any {
   function transformPrimitive(typ: string, val: any): any {
     if (typeof typ === typeof val) return val;
+    if (typeof typ === 'boolean' && typeof val !== 'boolean') {
+      return !!+val;
+    }
     return invalidValue(typ, val, key, parent);
   }
 
