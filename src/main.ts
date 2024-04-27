@@ -10,14 +10,16 @@ async function run(): Promise<void> {
       const testReports = core.getMultilineInput('test-reports');
       const coverageReports = core.getMultilineInput('coverage-reports');
 
-      const results: ResultSummary[] = await Promise.all(testReports.map(async (testReport): Promise<ResultSummary> => {
-        core.info(`Parsing file ${testReport}`);
-        const json = (await fsPromises.readFile(testReport)).toString();
-        return Convert.toResultSummary(JSON.parse(json));
-      }));
+      const results: ResultSummary[] = await Promise.all(
+        testReports.map(async (testReport): Promise<ResultSummary> => {
+          core.info(`Parsing file ${testReport}`);
+          const json = (await fsPromises.readFile(testReport)).toString();
+          return Convert.toResultSummary(JSON.parse(json));
+        }),
+      );
 
       core.info(`Results: ${results}`);
-      
+
       coverageReports.forEach(coverageReport => {
         core.info(`Parsing file ${coverageReport}`);
       });
