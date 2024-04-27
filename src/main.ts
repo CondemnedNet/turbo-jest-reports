@@ -13,8 +13,8 @@ async function run(): Promise<void> {
       const results: ResultSummary[] = await Promise.all(
         testReports.map(async (testReport): Promise<ResultSummary> => {
           core.info(`Parsing file ${testReport}`);
-          const json = (await fsPromises.readFile(testReport)).toString();
-          return Convert.toResultSummary(JSON.parse(json));
+          const json = await fsPromises.readFile(testReport, 'utf8');
+          return Convert.toResultSummary(JSON.parse(json.toString()));
         }),
       );
 
