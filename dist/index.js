@@ -258,7 +258,7 @@ function run() {
                 const results = yield Promise.all(testReports.map((testReport) => __awaiter(this, void 0, void 0, function* () {
                     core.info(`Parsing file ${testReport}`);
                     const json = yield fs_1.promises.readFile(testReport, 'utf8');
-                    return ResultSummary_1.Convert.toResultSummary(JSON.parse(json.toString()));
+                    return ResultSummary_1.Convert.toResultSummary(json.toString());
                 })));
                 core.info(`Results: ${results}`);
                 coverageReports.forEach(coverageReport => {

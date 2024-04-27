@@ -14,7 +14,7 @@ async function run(): Promise<void> {
         testReports.map(async (testReport): Promise<ResultSummary> => {
           core.info(`Parsing file ${testReport}`);
           const json = await fsPromises.readFile(testReport, 'utf8');
-          return Convert.toResultSummary(JSON.parse(json.toString()));
+          return Convert.toResultSummary(json.toString());
         }),
       );
 
