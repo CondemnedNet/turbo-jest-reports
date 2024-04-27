@@ -1,6 +1,8 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { Octokit } from '@octokit/action';
+import { Convert, ResultSummary } from './ResultSummary';
+import { promises as fsPromises } from 'fs';
 
 async function run(): Promise<void> {
   try {
@@ -8,10 +10,14 @@ async function run(): Promise<void> {
       const testReports = core.getMultilineInput('test-reports');
       const coverageReports = core.getMultilineInput('coverage-reports');
 
-      testReports.forEach(testReport => {
+      const results: ResultSummary[] = await Promise.all(testReports.map(async (testReport): Promise<ResultSummary> => {
         core.info(`Parsing file ${testReport}`);
-      });
+        const json = (await fsPromises.readFile(testReport)).toString();
+        return Convert.toResultSummary(JSON.parse(json));
+      }));
 
+      core.info(`Results: ${results}`);
+      
       coverageReports.forEach(coverageReport => {
         core.info(`Parsing file ${coverageReport}`);
       });
